@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEON ARENA - Market</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#131318",
+                        "secondary": "#e4feff",
+                        "tertiary-fixed": "#ffd9df",
+                        "surface-bright": "#39383e",
+                        "tertiary": "#ffb1c1",
+                        "surface-container-low": "#1b1b20",
+                        "neon-cyan-glow": "rgba(8, 247, 254, 0.4)",
+                        "primary": "#d4bbff",
+                        "on-surface": "#e4e1e9",
+                        "secondary-fixed-dim": "#00dce2",
+                        "surface-container": "#1f1f24",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#d4bbff",
+                        "inverse-on-surface": "#303035",
+                        "secondary-container": "#00f5fc",
+                        "primary-fixed-dim": "#d4bbff",
+                        "on-tertiary-container": "#fff1f2",
+                        "background-deep": "#050507",
+                        "on-secondary-fixed-variant": "#004f52",
+                        "on-primary-container": "#faf1ff",
+                        "neon-purple-glow": "rgba(138, 63, 252, 0.4)",
+                        "tertiary-container": "#db0064",
+                        "outline": "#968da1",
+                        "border-glass": "rgba(255, 255, 255, 0.12)",
+                        "surface": "#131318",
+                        "surface-container-highest": "#35343a",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#4bf9ff",
+                        "on-error": "#690005",
+                        "on-secondary": "#003738",
+                        "on-secondary-fixed": "#002021",
+                        "tertiary-fixed-dim": "#ffb1c1",
+                        "outline-variant": "#4b4455",
+                        "on-background": "#e4e1e9",
+                        "surface-variant": "#35343a",
+                        "on-tertiary-fixed-variant": "#8f003f",
+                        "background": "#131318",
+                        "on-tertiary-fixed": "#3f0018",
+                        "on-primary-fixed-variant": "#5d00c2",
+                        "on-surface-variant": "#cdc2d8",
+                        "on-secondary-container": "#006c6f",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-container-high": "#2a292f",
+                        "surface-glass": "rgba(255, 255, 255, 0.03)",
+                        "surface-container-lowest": "#0e0e13",
+                        "primary-container": "#8a3ffc",
+                        "on-primary": "#41008b",
+                        "on-tertiary": "#66002b",
+                        "primary-fixed": "#ebdcff",
+                        "on-primary-fixed": "#270058",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#7825ea"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "container-max": "1440px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Sora"],
+                        "stats-number": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "stats-number": ["20px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "display-xl": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                        "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "500" }]
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background-deep');
+            color: theme('colors.on-surface');
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .glass-panel {
+            background-color: theme('colors.surface-glass');
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid theme('colors.border-glass');
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-text-glow {
+            text-shadow: 0 0 10px theme('colors.neon-cyan-glow');
+        }
+
+        /* Custom scrollbar for immersive feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.background-deep'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+<!-- Ambient Background Glows -->
+<div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-container/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[40%] h-[60%] bg-secondary-container/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-glass shadow-[0_4px_30px_rgba(138,63,252,0.15)] bg-surface-glass backdrop-blur-xl">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<div class="text-headline-md font-headline-md font-bold tracking-tighter text-primary bg-gradient-to-r from-primary to-secondary-fixed-dim bg-clip-text text-transparent flex items-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">token</span>
+                NEON ARENA
+            </div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-headline-md text-[16px] text-on-surface-variant hover:text-on-surface hover:bg-surface-bright/20 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Arena</a>
+<a class="font-headline-md text-[16px] text-on-surface-variant hover:text-on-surface hover:bg-surface-bright/20 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Tournaments</a>
+<a class="font-headline-md text-[16px] text-secondary border-b-2 border-secondary-fixed-dim pb-1 px-3 shadow-[0_1px_10px_rgba(8,247,254,0.3)]" href="#">Market</a>
+<a class="font-headline-md text-[16px] text-on-surface-variant hover:text-on-surface hover:bg-surface-bright/20 transition-all duration-300 px-3 py-2 rounded-lg" href="#">News</a>
+<a class="font-headline-md text-[16px] text-on-surface-variant hover:text-on-surface hover:bg-surface-bright/20 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Community</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-secondary transition-colors p-2 rounded-full hover:bg-surface-bright/20">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-bright/20 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary-fixed rounded-full shadow-[0_0_8px_rgba(75,249,255,0.8)]"></span>
+</button>
+<button class="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary-container to-inverse-primary text-on-primary-container font-headline-md text-[14px] px-6 py-2.5 rounded-lg shadow-[0_0_20px_rgba(138,63,252,0.3)] hover:shadow-[0_0_25px_rgba(138,63,252,0.6)] transition-all duration-300 font-semibold border border-primary-fixed/30">
+                    Get Started
+                </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow z-10 pt-[100px] pb-24 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto relative">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-2 tracking-tight">Digital <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-fixed-dim to-primary">Armory</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Upgrade your arsenal with exclusive, hyper-rare drops. All assets are verified on the Neon ledger.</p>
+</div>
+<!-- Wallet Summary Pill -->
+<div class="glass-panel rounded-full px-6 py-3 flex items-center gap-4">
+<span class="text-on-surface-variant font-label-caps text-label-caps">BALANCE</span>
+<div class="flex items-center gap-2 text-secondary-fixed font-stats-number text-stats-number">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+                    14,250 NC
+                </div>
+<button class="ml-2 w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors text-on-surface">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Filter/Category Row -->
+<div class="flex overflow-x-auto pb-4 mb-8 gap-4 hide-scrollbar">
+<button class="px-6 py-2.5 rounded-full border border-secondary-fixed/50 bg-secondary-fixed/10 text-secondary-fixed font-label-caps text-label-caps whitespace-nowrap shadow-[0_0_15px_rgba(0,220,226,0.2)] transition-all">All GEAR</button>
+<button class="px-6 py-2.5 rounded-full border border-glass bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-bright/30 hover:text-on-surface transition-all">EXO-SUITS</button>
+<button class="px-6 py-2.5 rounded-full border border-glass bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-bright/30 hover:text-on-surface transition-all">WEAPON SKINS</button>
+<button class="px-6 py-2.5 rounded-full border border-glass bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-bright/30 hover:text-on-surface transition-all">NEURAL BOOSTS</button>
+<button class="px-6 py-2.5 rounded-full border border-glass bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-bright/30 hover:text-on-surface transition-all">EMOTES</button>
+<div class="ml-auto flex items-center gap-2 pl-4 border-l border-glass">
+<button class="p-2 rounded-lg bg-surface-glass border border-glass text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Highlight Item (Spans 8 cols) -->
+<div class="md:col-span-8 glass-panel rounded-xl overflow-hidden relative group min-h-[400px] flex flex-col justify-end p-8">
+<!-- Background Image Layer -->
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-background-deep via-surface-container/50 to-transparent">
+<img alt="Featured Item" class="w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" data-alt="A highly detailed, 3D rendered futuristic exo-suit helmet floating in a dark void. The helmet is composed of sleek obsidian metal plating with intricate geometric paneling. It features a striking visor that emits an intense, glowing cyan light, reflecting against the dark surfaces. The overall lighting is moody and cinematic, utilizing a strict cyberpunk color palette of deep blacks, vivid neon cyans, and subtle purple rim lights to perfectly match the sleek, high-tech glassmorphism UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1RlH8wlBu80LJcXyfNDDp4Lzeb5NdjnN31vusJ2JiAjjAku-nE8yEMfwa6b9Dgl74SCS7MXuxd0MqnwtAIXJXDKn3twVNbXcrncxbqz0ThKaG0DcKY9VQEPhtG_aCU6fdHm0ac0hYi9Dqg-X7kZJBQ8kZBccWbnubFrDojxpAQS2oLu42R969aQcxHvGSSDpxdwRTYBgN7jwiiO38WgHdhnLnoZgdTjOQ6a3MRtmEojg4LrKtAU06L4lKiDEveixsTH9sSMRQbic"/>
+</div>
+<!-- Content Layer -->
+<div class="relative z-10 w-full md:w-2/3">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-caps text-[10px] border border-error/30 uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span> Mythic Drop
+                        </span>
+<span class="text-on-surface-variant font-label-caps text-[10px]">ENDS IN 04:12:59</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2 group-hover:text-secondary-fixed transition-colors">Voidwalker Visor MK-IV</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Equip the pinnacle of neural interface technology. Enhances targeting acquisition speed by 15% and features adaptive cloaking tech.</p>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-caps text-label-caps mb-1">CURRENT PRICE</span>
+<span class="font-stats-number text-[28px] text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">token</span> 12,500
+                            </span>
+</div>
+<button class="bg-gradient-to-r from-primary-container to-inverse-primary text-on-primary-container font-headline-md text-[16px] px-8 py-3 rounded-lg shadow-[0_0_20px_rgba(138,63,252,0.4)] hover:shadow-[0_0_30px_rgba(8,247,254,0.6)] hover:from-secondary-container hover:to-secondary-fixed-dim hover:text-on-secondary-container transition-all duration-300 font-semibold flex items-center gap-2">
+                            Acquire Now <span class="material-symbols-outlined text-[18px]">shopping_cart_checkout</span>
+</button>
+</div>
+</div>
+<!-- Hover Glow Frame -->
+<div class="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-xl pointer-events-none transition-colors duration-500 shadow-[inset_0_0_40px_rgba(138,63,252,0)] group-hover:shadow-[inset_0_0_40px_rgba(138,63,252,0.2)]"></div>
+</div>
+<!-- Trending Quick Stats (Spans 4 cols) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl p-6 flex-grow flex flex-col">
+<h3 class="font-headline-md text-[18px] text-on-surface mb-4 flex items-center gap-2 border-b border-glass pb-3">
+<span class="material-symbols-outlined text-secondary-fixed">trending_up</span> Market Movers
+                    </h3>
+<div class="flex flex-col gap-4 mt-2">
+<!-- List Item 1 -->
+<div class="flex items-center justify-between group cursor-pointer hover:bg-surface-bright/20 p-2 rounded-lg transition-all -mx-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-container-high border border-glass overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-tertiary-container to-error-container opacity-80"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Crimson Tracer</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Weapon Skin</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-stats-number text-[14px] text-on-surface">850 NC</div>
+<div class="font-label-caps text-[10px] text-secondary-fixed flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px]">arrow_upward</span> 12%</div>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center justify-between group cursor-pointer hover:bg-surface-bright/20 p-2 rounded-lg transition-all -mx-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-container-high border border-glass overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-primary-container to-surface-container opacity-80"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Shadow Step</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Exo-Mod</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-stats-number text-[14px] text-on-surface">2,100 NC</div>
+<div class="font-label-caps text-[10px] text-secondary-fixed flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px]">arrow_upward</span> 8%</div>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center justify-between group cursor-pointer hover:bg-surface-bright/20 p-2 rounded-lg transition-all -mx-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-container-high border border-glass overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-secondary-container to-surface-container opacity-80"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Cobalt Core</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Energy Cell</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-stats-number text-[14px] text-on-surface">450 NC</div>
+<div class="font-label-caps text-[10px] text-error flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px]">arrow_downward</span> 3%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Grid Items (Span 3 cols each for a 4-col row) -->
+<!-- Item Card 1 -->
+<div class="md:col-span-3 glass-panel rounded-xl overflow-hidden flex flex-col group relative">
+<div class="h-48 relative overflow-hidden bg-surface-container-lowest">
+<!-- Image Placeholder generated via CSS pattern/gradient to avoid base64 bloat while adhering to rules. Or use a dark conceptual image -->
+<img alt="Item Image" class="w-full h-full object-cover opacity-80 mix-blend-lighten group-hover:scale-110 transition-transform duration-500" data-alt="A close-up, highly detailed 3D rendering of a futuristic sniper rifle barrel resting on a dark metallic surface. The weapon features harsh, angular geometry and is composed of matte black composite materials with bright, glowing magenta accent lines running along the barrel. The scene is lit by harsh, cool-toned directional light that casts deep, sharp shadows, emphasizing the weapon's deadly precision. The overall aesthetic is strictly dark sci-fi, perfectly aligning with a premium, glassmorphism gaming interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2LYT60QutlvdjgwLdWINs8YCHJ9WMzYaylDWwBKdfZCY2KZcydBSB6DFfRp2Y7ZLI8b9PBAAvQQzejq7AFt1p6IwwSGH6rW3YeKISaA2FKQPtOK_4u0w44agCTWELHcy1vAmzs5sPhrcmEKDTuvn0AeoT2MZ2-OHsytTS7rYzEFQ-v2dcWe_X2PaUgBRJLSh6lpcXe9LzoAVl_7EjfBAjBQ2Wj0UzlROQrix-ncbD7Jp2im35mb9H5a_2tpkNKWX-OLnnLarim14"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-primary-container/80 backdrop-blur-md text-on-primary-container font-label-caps text-[10px] border border-primary/30 uppercase">Epic</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h4 class="font-headline-md text-[16px] text-on-surface mb-1 truncate">Neon Striker Pulse</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant mb-4">Assault Rifle Skin</p>
+<div class="mt-auto flex items-center justify-between border-t border-glass pt-4">
+<span class="font-stats-number text-[16px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">token</span> 1,200
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center hover:bg-secondary-fixed/20 hover:text-secondary-fixed transition-colors text-on-surface-variant border border-glass">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Interactive Border -->
+<div class="absolute inset-0 border border-transparent group-hover:border-secondary-fixed/30 rounded-xl pointer-events-none transition-colors"></div>
+</div>
+<!-- Item Card 2 -->
+<div class="md:col-span-3 glass-panel rounded-xl overflow-hidden flex flex-col group relative">
+<div class="h-48 relative overflow-hidden bg-surface-container-lowest">
+<img alt="Item Image" class="w-full h-full object-cover opacity-80 mix-blend-lighten group-hover:scale-110 transition-transform duration-500" data-alt="A stylized 3D render of a glowing, translucent crystalline power core floating against a pitch-black background. The core emanates an intense, pulsating cyan and deep blue light, illuminating intricate circuitry embedded within its crystalline structure. Subtle volumetric dust particles float around it in the dark void. The image relies heavily on high contrast and vibrant neon colors against obsidian darkness, matching the design system's glassmorphism and cyberpunk visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAndLc__ndCOtMQq-VL3XRS3T8K1xrL4LVwHc-cAhoANLfALKPpHotc8a2RQK4tpYJWkoSMywc2IfZbQ1GGzYGYNn6dX7etJjG6GqXDkNx3gA3WC7ldtWFAOYNJ0iUd4F2WlUeFb0NxuLwgv_q1gN2k-wyrwi6dC4A04yvkMFhbm4Q7oUY4_R4KCiTz3tiO7UeKtl1sVfgHYAgcWBKwKNdQ-GuNiLXbKm-0vQxIzJjWS4qeIJrWWMNJVnVh0KeuU0bln5lZ6EoNqV8"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-secondary-container/80 backdrop-blur-md text-on-secondary-container font-label-caps text-[10px] border border-secondary/30 uppercase">Rare</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h4 class="font-headline-md text-[16px] text-on-surface mb-1 truncate">Aether Core</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant mb-4">Booster / Consumable</p>
+<div class="mt-auto flex items-center justify-between border-t border-glass pt-4">
+<span class="font-stats-number text-[16px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">token</span> 350
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center hover:bg-secondary-fixed/20 hover:text-secondary-fixed transition-colors text-on-surface-variant border border-glass">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Interactive Border -->
+<div class="absolute inset-0 border border-transparent group-hover:border-secondary-fixed/30 rounded-xl pointer-events-none transition-colors"></div>
+</div>
+<!-- Item Card 3 -->
+<div class="md:col-span-3 glass-panel rounded-xl overflow-hidden flex flex-col group relative">
+<div class="h-48 relative overflow-hidden bg-surface-container-lowest">
+<div class="w-full h-full bg-gradient-to-tr from-surface-dim to-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-[64px] text-outline-variant group-hover:text-tertiary-fixed transition-colors duration-500">sports_esports</span>
+</div>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-surface-variant/80 backdrop-blur-md text-on-surface font-label-caps text-[10px] border border-outline/30 uppercase">Common</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h4 class="font-headline-md text-[16px] text-on-surface mb-1 truncate">Standard Grip Tape</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant mb-4">Weapon Mod</p>
+<div class="mt-auto flex items-center justify-between border-t border-glass pt-4">
+<span class="font-stats-number text-[16px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">token</span> 50
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center hover:bg-secondary-fixed/20 hover:text-secondary-fixed transition-colors text-on-surface-variant border border-glass">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Interactive Border -->
+<div class="absolute inset-0 border border-transparent group-hover:border-secondary-fixed/30 rounded-xl pointer-events-none transition-colors"></div>
+</div>
+<!-- Item Card 4 -->
+<div class="md:col-span-3 glass-panel rounded-xl overflow-hidden flex flex-col group relative">
+<div class="h-48 relative overflow-hidden bg-surface-container-lowest">
+<img alt="Item Image" class="w-full h-full object-cover opacity-70 mix-blend-screen group-hover:scale-110 transition-transform duration-500" data-alt="An abstract, macro shot of a glowing holographic interface floating in mid-air. The interface displays complex, illegible data streams and radar rings in sharp, neon purple and vibrant pink hues against a completely dark, out-of-focus background. The visual effect simulates a high-tech augmented reality overlay being projected into physical space. The aesthetic strictly adheres to a dark mode, cyberpunk UI style with intense glowing elements and glassmorphism transparency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2T7pgxTDlKPbmh0-Ahd7qTiWSb5EEbzFlHfFL4pFOQpsZ3HtUUB4rlQ11dGIx5vKZdMeKH_qCkEWk2IB_hWCeacESUaJmUnBvfFd0zjI4sRRR2vJnr4Orzl8nRGE7ruEFLVZPBsUj6FeEK-Vk8lT9OfBXnvz4qkq8-Mefhygmhycjq_0OYp96ygK0MrO3-PNa2Pyly9eS1awgBX-76GJefYHJFxWctQeGwEvw_VilR0W4K3R2pfZnYPqZvxoBOOypidbkuUC7iC0"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-tertiary-container/80 backdrop-blur-md text-on-tertiary-container font-label-caps text-[10px] border border-tertiary/30 uppercase">Legendary</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h4 class="font-headline-md text-[16px] text-on-surface mb-1 truncate">Holo-Decoy Emitter</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant mb-4">Tactical Gear</p>
+<div class="mt-auto flex items-center justify-between border-t border-glass pt-4">
+<span class="font-stats-number text-[16px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">token</span> 5,500
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center hover:bg-secondary-fixed/20 hover:text-secondary-fixed transition-colors text-on-surface-variant border border-glass">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Interactive Border -->
+<div class="absolute inset-0 border border-transparent group-hover:border-secondary-fixed/30 rounded-xl pointer-events-none transition-colors"></div>
+</div>
+</div>
+<!-- Pagination/Load More (Asymmetric placement) -->
+<div class="mt-16 flex justify-center">
+<button class="px-8 py-3 rounded-full border border-glass bg-surface-glass text-on-surface-variant font-headline-md text-[14px] hover:bg-surface-bright/30 hover:text-on-surface transition-all flex items-center gap-2 group">
+                Load More Assets <span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop mt-auto flex flex-col items-center gap-unit bg-background-deep border-t border-glass relative z-10">
+<div class="w-full max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Brand -->
+<div class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">token</span> NEON ARENA
+            </div>
+<!-- Links -->
+<div class="flex flex-wrap justify-center gap-6 md:gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Partners</a>
+</div>
+<!-- Socials / Small interactions -->
+<div class="flex items-center gap-4">
+<a class="text-on-surface-variant hover:text-secondary-fixed hover:drop-shadow-[0_0_8px_rgba(75,249,255,0.8)] transition-all transform hover:scale-110" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-secondary-fixed hover:drop-shadow-[0_0_8px_rgba(75,249,255,0.8)] transition-all transform hover:scale-110" href="#"><span class="material-symbols-outlined">forum</span></a>
+</div>
+</div>
+<div class="w-full max-w-container-max mx-auto mt-8 pt-8 border-t border-glass/50 text-center md:text-left">
+<p class="font-body-md text-body-md text-on-surface-variant/50 text-[12px]">© 2024 NEON ARENA. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+</body></html>
